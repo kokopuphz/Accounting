@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common
+Bundle-SymbolicName: Accounts.Common
+Bundle-Version: 1.0.0.qualifier
+Export-Package: tsutsumi.accounts.common,
+ tsutsumi.accounts.common.reference,
+ tsutsumi.accounts.common.response,
+ tsutsumi.accounts.server,
+ tsutsumi.accounts.server.commands,
+ tsutsumi.accounts.server.db
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy

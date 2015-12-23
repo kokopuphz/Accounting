@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Accounts" id="Accounts.Main.product" application="Accounts.Main.Accounts.Main.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="false">
+
+   <aboutInfo>
+      <text>
+         OdsHelper
+
+Tool created for JODS.
+Copyright November 2011
+
+
+
+.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgs>-Xms128m -Xmx768m</vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <splash
+      location="Accounts.Main"
+      startupProgressRect="10,175,380,15"
+      startupMessageRect="200,160,100,15"
+      startupForegroundColor="8080C0" />
+   <launcher name="Accounting">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+      <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</windows>
+   </vm>
+
+   <plugins>
+      <plugin id="Accounts.Common"/>
+      <plugin id="Accounts.Main"/>
+      <plugin id="com.ibm.icu"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.observable"/>
+      <plugin id="org.eclipse.core.databinding.property"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.jface.databinding"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.workbench"/>
+   </plugins>
+
+   <features>
+      <feature id="OdsHelper.Main.Feature"/>
+      <feature id="OdsHelper.XMLPatcher.Feature"/>
+      <feature id="OdsHelper.DataDeleter.Feature"/>
+      <feature id="OdsHelper.Loader.Feature"/>
+      <feature id="OdsHelper.Main.JreFeature" version="1.0.1"/>
+      <feature id="org.eclipse.rcp" version="3.7.1.r37x_v20110729-9DB5FmNFnFLSFCtLxnRfMqt15A4A"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" version="1.0.1.R37x_v20110906-8290FZ3FUqIcLqkVkEaTdn_14C7G"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature" version="1.0.1.R37x_v20110906-782EpBqNKGUkZQpuT8hAlWlFbUeo"/>
+   </features>
+
+
+</product>
