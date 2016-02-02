@@ -1,9 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common
-Bundle-SymbolicName: Accounts.Common
+Bundle-SymbolicName: Accounts.Common;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: tsutsumi.accounts.common,
+Export-Package: com.mysql.jdbc,
+ com.mysql.jdbc.authentication,
+ com.mysql.jdbc.exceptions,
+ com.mysql.jdbc.exceptions.jdbc4,
+ com.mysql.jdbc.integration.c3p0,
+ com.mysql.jdbc.integration.jboss,
+ com.mysql.jdbc.interceptors,
+ com.mysql.jdbc.jdbc2.optional,
+ com.mysql.jdbc.jmx,
+ com.mysql.jdbc.log,
+ com.mysql.jdbc.profiler,
+ com.mysql.jdbc.util,
+ tsutsumi.accounts.common,
  tsutsumi.accounts.common.reference,
  tsutsumi.accounts.common.response,
  tsutsumi.accounts.server,
@@ -11,3 +23,5 @@ Export-Package: tsutsumi.accounts.common,
  tsutsumi.accounts.server.db
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/mysql-connector-java-5.1.38-bin.jar,
+ .

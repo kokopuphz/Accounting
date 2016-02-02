@@ -15,18 +15,27 @@ public class DatabaseController {
 	private DatabaseController() {
 		dbController = this;
 		try {
-			DriverManager.registerDriver((Driver)Class.forName("sun.jdbc.odbc.JdbcOdbcDriver").newInstance());
+			DriverManager.registerDriver((Driver)Class.forName("com.mysql.jdbc.Driver").newInstance());
 		} catch (Exception e) {
-			
+			System.out.println("Driver NOT loaded!");
+			e.printStackTrace();
+		    throw new IllegalStateException("Cannot find the driver in the classpath!", e);
 		}
 	}
 	
 	private void openConnection() throws SQLException {
-		String filename = "C:/WORKFOLDER/accounts.mdb.accdb";
-		String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=";
-		database+= filename.trim() + ";DriverID=22;READONLY=false}"; // add on to the end 
-		conn = DriverManager.getConnection( database ,"",""); 
+//		String filename = "C:/WORKFOLDER/accounts.mdb.accdb";
+//		String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=";
+//		database+= filename.trim() + ";DriverID=22;READONLY=false}"; // add on to the end 
+//		conn = DriverManager.getConnection( database ,"",""); 
+//		conn.setAutoCommit(true);
+
+		String url = "jdbc:mysql://localhost:3306/accounting_dollars";
+		String username="testuser";
+		String pasword="testdbtestpass";
+		conn = DriverManager.getConnection(url, username, pasword);
 		conn.setAutoCommit(true);
+		
 	}
 
 	
