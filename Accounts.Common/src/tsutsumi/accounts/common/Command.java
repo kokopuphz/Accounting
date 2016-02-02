@@ -84,7 +84,7 @@ public abstract class Command {
 	
 	protected BigDecimal getParam(String param, BigDecimal defaultValue) {
 		if (params.containsKey(param))
-			return BigDecimal.valueOf(Double.valueOf(params.get(param)));
+			return BigDecimal.valueOf(Double.valueOf(params.get(param))).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 		return defaultValue;
 	}
 	

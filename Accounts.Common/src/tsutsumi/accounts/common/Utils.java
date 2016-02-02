@@ -1,6 +1,7 @@
 package tsutsumi.accounts.common;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -19,11 +20,12 @@ public class Utils {
 		formatter.setNegativePrefix("- "+ symbol); // or "-"+symbol if that's what you need
 		formatter.setNegativeSuffix("");
 	}
+	public static int DECIMAL_PRECISION = 2;
 	
 	public static String formatNumber(BigDecimal number) {
 		if (number==null)
-			number = new BigDecimal(0);
-		return formatter.format(number.doubleValue());
+			number = new BigDecimal(0).setScale(DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
+		return formatNumber(number.doubleValue());
 	}
 
 	public static String formatNumber(double number) {

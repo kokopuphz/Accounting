@@ -7,6 +7,7 @@ import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import tsutsumi.accounts.common.Utils;
 import tsutsumi.accounts.common.XmlInterface;
 
 public class BigDecimalResponse extends Response {
@@ -35,7 +36,7 @@ public class BigDecimalResponse extends Response {
 		for (int i=0; i < childNodes.getLength(); i++) {
 			Node child = childNodes.item(i);
 			if (child.getNodeName().equals("VALUE")) 
-				data = BigDecimal.valueOf(Double.valueOf(child.getTextContent()));
+				data = BigDecimal.valueOf(Double.valueOf(child.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 		}
 	}
 }

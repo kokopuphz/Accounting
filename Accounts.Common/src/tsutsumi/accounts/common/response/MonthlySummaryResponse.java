@@ -8,6 +8,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tsutsumi.accounts.common.MonthlySummaryTotals;
+import tsutsumi.accounts.common.Utils;
 import tsutsumi.accounts.common.XmlInterface;
 
 public class MonthlySummaryResponse extends Response {
@@ -67,9 +68,9 @@ public class MonthlySummaryResponse extends Response {
 					if (value.getNodeName().equals("ID"))
 						id = Integer.valueOf(value.getTextContent());
 					if (value.getNodeName().equals("CREDIT"))
-						credit = new BigDecimal(Double.valueOf(value.getTextContent()));
+						credit = new BigDecimal(Double.valueOf(value.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 					if (value.getNodeName().equals("DEBIT"))
-						debit = new BigDecimal(Double.valueOf(value.getTextContent()));
+						debit = new BigDecimal(Double.valueOf(value.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 				}
 				reportSummary.add(YYYYMM, id, credit, debit);
 			}

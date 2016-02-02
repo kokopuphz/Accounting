@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tsutsumi.accounts.common.TransactionRecord;
+import tsutsumi.accounts.common.Utils;
 import tsutsumi.accounts.common.XmlInterface;
 
 public class TransactionsResponse extends Response {
@@ -94,7 +95,7 @@ public class TransactionsResponse extends Response {
 		for (int i=0; i < childNodes.getLength(); i++) {
 			Node child = childNodes.item(i);
 			if (child.getNodeName().equals("TOTAL")) {
-				total = new BigDecimal(Double.valueOf(child.getTextContent()));
+				total = new BigDecimal(Double.valueOf(child.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 			} else if (child.getNodeName().equals("TRANSACTIONS")) {
 				NodeList values = child.getChildNodes();
 				int rownumber = 0;
@@ -121,9 +122,9 @@ public class TransactionsResponse extends Response {
 					if (value.getNodeName().equals("ACCOUNT_ID"))
 						accountId = Integer.valueOf(value.getTextContent());
 					if (value.getNodeName().equals("CREDIT"))
-						credit = new BigDecimal(Double.valueOf(value.getTextContent()));
+						credit = new BigDecimal(Double.valueOf(value.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 					if (value.getNodeName().equals("DEBIT"))
-						debit = new BigDecimal(Double.valueOf(value.getTextContent()));
+						debit = new BigDecimal(Double.valueOf(value.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 					if (value.getNodeName().equals("TRANSACTION_DATE"))
 						transDate = value.getTextContent();
 					if (value.getNodeName().equals("DESCRIPTION"))

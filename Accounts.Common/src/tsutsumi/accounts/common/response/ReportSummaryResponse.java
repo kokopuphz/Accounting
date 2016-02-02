@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tsutsumi.accounts.common.ReportSummaryRecord;
+import tsutsumi.accounts.common.Utils;
 import tsutsumi.accounts.common.XmlInterface;
 
 public class ReportSummaryResponse extends Response {
@@ -80,9 +81,9 @@ public class ReportSummaryResponse extends Response {
 					if (value.getNodeName().equals("ACCOUNT_ID"))
 						accountId = Integer.valueOf(value.getTextContent());
 					if (value.getNodeName().equals("CREDIT"))
-						credit = new BigDecimal(Double.valueOf(value.getTextContent()));
+						credit = new BigDecimal(Double.valueOf(value.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 					if (value.getNodeName().equals("DEBIT"))
-						debit = new BigDecimal(Double.valueOf(value.getTextContent()));
+						debit = new BigDecimal(Double.valueOf(value.getTextContent())).setScale(Utils.DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
 				}
 				reportSummary.add(new ReportSummaryRecord(typeId, categoryId, accountId, methodId, credit, debit));
 			}
