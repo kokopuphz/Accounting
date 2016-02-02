@@ -1,18 +1,23 @@
 package tsutsumi.accounts.common;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utils {
-	private static NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.JAPAN);
+	private static DecimalFormat formatter = (DecimalFormat)NumberFormat.getCurrencyInstance(Locale.US);
+//	private static NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.JAPAN);
 	private static SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
 	private static SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy/MM");
 	static {
-		formatter.setMaximumFractionDigits(0);
+		formatter.setMaximumFractionDigits(2);
+		String symbol = formatter.getCurrency().getSymbol();
+		formatter.setNegativePrefix("- "+ symbol); // or "-"+symbol if that's what you need
+		formatter.setNegativeSuffix("");
 	}
 	
 	public static String formatNumber(BigDecimal number) {
@@ -39,9 +44,9 @@ public class Utils {
 			Date date = formatter1.parse(YYYYMMDD);
 			Calendar cal = Calendar.getInstance();
 			cal.setTimeInMillis(date.getTime());
-			if (cal.get(Calendar.DAY_OF_MONTH) > 24) {
-				cal.add(Calendar.MONTH, 1);
-			}
+//			if (cal.get(Calendar.DAY_OF_MONTH) > 24) {
+//				cal.add(Calendar.MONTH, 1);
+//			}
 			returnString = formatter2.format(cal.getTime());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,9 +59,9 @@ public class Utils {
 		try {
 			Calendar cal = Calendar.getInstance();
 			cal.setTimeInMillis(date.getTime());
-			if (cal.get(Calendar.DAY_OF_MONTH) > 24) {
-				cal.add(Calendar.MONTH, 1);
-			}
+//			if (cal.get(Calendar.DAY_OF_MONTH) > 24) {
+//				cal.add(Calendar.MONTH, 1);
+//			}
 			returnString = formatter2.format(cal.getTime());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,21 +95,34 @@ public class Utils {
 
 	public synchronized static String convAccToStartString(String YYYYMM) {
 		String returnString = "";
-		try {
-			Date date = formatter2.parse(YYYYMM);
-			Calendar cal = Calendar.getInstance();
-			cal.setTimeInMillis(date.getTime());
-			cal.add(Calendar.MONTH, -1);
-			returnString = formatter2.format(cal.getTime());
-			returnString += "/25";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Date date = formatter2.parse(YYYYMM);
+//			Calendar cal = Calendar.getInstance();
+//			cal.setTimeInMillis(date.getTime());
+//			cal.add(Calendar.MONTH, -1);
+//			returnString = formatter2.format(cal.getTime());
+//			returnString += "/25";
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		returnString = YYYYMM + "/01";
 		return returnString;
 	}
 
 	public synchronized static String convAccToEndString(String YYYYMM) {
-		return YYYYMM + "/24";
+		String returnString = "";
+		try {
+			Date date = formatter2.parse(YYYYMM + "/01");
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(date.getTime());
+			cal.add(Calendar.MONTH, 1);
+			cal.add(Calendar.DATE, -1);
+			returnString = formatter1.format(cal.getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnString;
+//		return YYYYMM + "/24";
 	}
 
 	public synchronized static Date convStringToDate(String YYYYMMDD) {
