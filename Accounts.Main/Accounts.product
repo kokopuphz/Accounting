@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Accounts" id="Accounts.Main.product" application="Accounts.Main.Accounts.Main.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="false">
+<product name="Accounts" id="Accounts.Main.product" application="Accounts.Main.Accounts.Main.application" version="1.2.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <text>
@@ -31,7 +31,7 @@ Copyright November 2011
       startupProgressRect="10,175,380,15"
       startupMessageRect="200,160,100,15"
       startupForegroundColor="8080C0" />
-   <launcher name="Accounting">
+   <launcher name="AccountingUS">
       <solaris/>
       <win useIco="false">
          <bmp/>
@@ -41,7 +41,6 @@ Copyright November 2011
    <vm>
       <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</windows>
    </vm>
-
 
    <plugins>
       <plugin id="Accounts.Common"/>
