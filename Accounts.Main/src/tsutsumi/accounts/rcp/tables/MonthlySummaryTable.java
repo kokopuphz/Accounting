@@ -51,6 +51,7 @@ public class MonthlySummaryTable {
 		
 		currentHightlightedLabel=null;
 		previousColor = null;
+		currentSelectedRow = null;
 
 		for (Control c : container.getChildren()) {
 			c.dispose();
