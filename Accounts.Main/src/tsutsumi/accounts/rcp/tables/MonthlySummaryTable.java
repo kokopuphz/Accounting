@@ -536,7 +536,7 @@ public class MonthlySummaryTable {
 				currentSelectedRow = row;
 				if (currentSelectedRow != null) {
 					for (Label l : currentSelectedRow) {
-						l.setForeground(Colors.CCBG);
+						l.setForeground(Colors.HIGHLIGHT_TEXT);
 					}
 				}
 			}

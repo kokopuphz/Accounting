@@ -19,7 +19,9 @@ public final class Colors {
 	public static final Color HIGHLIGHT = new Color(Display.getCurrent(), 155, 155, 155);
 	
 	public static final Color ADDNEWBG = new Color (Display.getCurrent() , 230, 255, 255);
-	public static final Color CCBG = new Color (Display.getCurrent() , 64, 80, 255);
+	public static final Color CCBG = new Color (Display.getCurrent() , 230, 180, 200);
+	
+	public static final Color HIGHLIGHT_TEXT = new Color (Display.getCurrent() , 64, 80, 255);
 	
 	public static final Color BORDER = new Color(Display.getCurrent(), 130, 130, 130);
 }
