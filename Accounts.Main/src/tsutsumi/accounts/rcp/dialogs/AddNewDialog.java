@@ -869,9 +869,9 @@ public class AddNewDialog {
         gridData = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
         fromMethodCombo = new Combo(expenseContainer, SWT.DROP_DOWN | SWT.BORDER | SWT.READ_ONLY);
         ArrayList<Method> methFiltered = new ArrayList<Method>();
+        methFiltered.addAll(AbstractReferenceData.getCreditCardMethods());
         methFiltered.addAll(AbstractReferenceData.getCashMethods());
         methFiltered.addAll(AbstractReferenceData.getBankMethods());
-        methFiltered.addAll(AbstractReferenceData.getCreditCardMethods());
         Method[] meth = methFiltered.toArray(new Method[methFiltered.size()]);
         fromMethodCombo.setData(meth);
         for (Method s : meth) {
