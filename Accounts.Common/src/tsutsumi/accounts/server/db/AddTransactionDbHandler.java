@@ -39,8 +39,8 @@ public class AddTransactionDbHandler {
 		String TRANSACTION_MAIN = "INSERT INTO transaction_main(transaction_date, category_id, description) values(?,?,?) ";
 		String TRANSACTION_SUB = "INSERT INTO transaction_sub(transaction_id, sub_transaction_id, account_id, method_id, credit, debit) " +
 				"values(?,?,?,?,?,?)";		
-		String CC_CLEARING_INSERT = "INSERT INTO CC_CLEARING(transaction_id, clearing_transaction_id) values (?, ?) ";
-		String CC_CLEARING_UPDATE = "UPDATE CC_CLEARING set clearing_transaction_id = ? where transaction_id = ? ";
+		String CC_CLEARING_INSERT = "INSERT INTO cc_clearing(transaction_id, clearing_transaction_id) values (?, ?) ";
+		String CC_CLEARING_UPDATE = "UPDATE cc_clearing set clearing_transaction_id = ? where transaction_id = ? ";
 		try {
 			if (oraResultSet != null) {
 				oraResultSet.close();
@@ -56,7 +56,7 @@ public class AddTransactionDbHandler {
 			stmt = null;
 			
 			if (returnCode == 1) {
-				stmt = DatabaseController.getConnection().prepareStatement("SELECT @@IDENTITY FROM TRANSACTION_MAIN ");
+				stmt = DatabaseController.getConnection().prepareStatement("SELECT @@IDENTITY FROM transaction_main ");
 				oraResultSet = stmt.executeQuery();
 				oraResultSet.next();
 				int keyValue = oraResultSet.getInt(1);
