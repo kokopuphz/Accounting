@@ -178,11 +178,11 @@ public class GetSummaryDbHandler {
 //					"where sub2.transaction_id = sub.transaction_id " +
 //					"and sub2.account_id = sub.account_id " +
 //					"and sub2.sub_transaction_id <> sub.sub_transaction_id) ";
-			masterTableSQL = "ACCOUNT_MASTER master ";
+			masterTableSQL = "account_master master ";
 		} else if (groupBy.equals("METHOD")){
 			idString = "METHOD_ID ";
 			joinSql = "sub.method_id = master.method_id ";
-			masterTableSQL = "METHOD_MASTER master ";
+			masterTableSQL = "method_master master ";
 			
 //		} else if (groupBy.equals("TYPE")){
 //			idString = "TYPE_ID ";
@@ -191,7 +191,7 @@ public class GetSummaryDbHandler {
 		} else if (groupBy.equals("CATEGORY")) {
 			idString = "CATEGORY_ID ";
 			joinSql = "master.category_id = main.category_id ";
-			masterTableSQL = "CATEGORY_MASTER master ";
+			masterTableSQL = "category_master master ";
 		}
 		
 		SQL = "SELECT transaction_date, master." + idString + ", sum(credit), sum(debit) " +
