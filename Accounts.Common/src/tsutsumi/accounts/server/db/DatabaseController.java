@@ -5,17 +5,35 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-//import oracle.jdbc.OracleDriver;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 
 public class DatabaseController {
 
 	private Connection conn;
 	private static DatabaseController dbController;
+	String user = "user";
+	String password = "password";
+	String host = "remotehost";
+	int port=929;
 	
 	private DatabaseController() {
+		try {
+			JSch jsch = new JSch();
+			Session session = jsch.getSession(user, host, port);
+			session.setPassword(password);
+			session.setConfig("StrictHostKeyChecking", "no");
+			session.connect();
+			session.setPortForwardingL(3929, "localhost", 3929);
+	    } catch(Exception e){
+	    	System.err.print(e);
+		}
+
+		
 		dbController = this;
 		try {
-			DriverManager.registerDriver((Driver)Class.forName("com.mysql.jdbc.Driver").newInstance());
+			DriverManager.registerDriver((Driver)Class.forName("org.mariadb.jdbc.Driver").newInstance());
+			
 		} catch (Exception e) {
 			System.out.println("Driver NOT loaded!");
 			e.printStackTrace();
@@ -23,19 +41,16 @@ public class DatabaseController {
 		}
 	}
 	
+	
+	public static void go(){
+	}
+	
 	private void openConnection() throws SQLException {
-//		String filename = "C:/WORKFOLDER/accounts.mdb.accdb";
-//		String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=";
-//		database+= filename.trim() + ";DriverID=22;READONLY=false}"; // add on to the end 
-//		conn = DriverManager.getConnection( database ,"",""); 
-//		conn.setAutoCommit(true);
-
-		String url = "jdbc:mysql://localhost:3306/accounting_dollars";
-		String username="testuser";
-		String pasword="testdbtestpass";
+		String url = "jdbc:mariadb://localhost:3929/accounting_dollars";
+		String username="root";
+		String pasword="password";
 		conn = DriverManager.getConnection(url, username, pasword);
 		conn.setAutoCommit(true);
-		
 	}
 
 	
