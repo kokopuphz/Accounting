@@ -5,6 +5,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
@@ -45,6 +46,7 @@ public class DatabaseController {
 			session.setConfig("StrictHostKeyChecking", "no");
 			session.connect();
 			session.setPortForwardingL(sqlPort, "localhost", sqlPort);
+			System.out.println("ssh connection established");
 	    } catch(Exception e){
 	    	System.err.print(e);
 		}
@@ -58,12 +60,27 @@ public class DatabaseController {
 		if (dbController == null) {
 			dbController = new DatabaseController();
 		}
-		if (dbController.conn == null || session == null || !session.isConnected() || dbController.conn.isClosed()) {
+		if (dbController.conn == null || session == null || !sshIsOpen() || dbController.conn.isClosed()) {
 			dbController.openConnection();			
 		}
 		return dbController.conn;
 	}
 	
+	private static boolean sshIsOpen() {
+		if (session==null)
+			return false;
+		try  {
+	        ChannelExec testChannel = (ChannelExec)session.openChannel("exec");
+	        testChannel.setCommand("true");
+	        testChannel.connect();
+	        testChannel.disconnect();
+	        return true;
+		} catch (Exception e) {
+			session.disconnect();
+			session = null;
+			return false;
+		}
+	}
 	
 	
 	public static void close() throws SQLException {
