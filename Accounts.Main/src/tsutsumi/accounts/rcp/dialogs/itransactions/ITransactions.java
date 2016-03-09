@@ -79,7 +79,7 @@ public class ITransactions {
 			}
     	});
 		Point currentLoc = thisShell.getLocation();
-		thisShell.setBounds(currentLoc.x, currentLoc.y, 660, 600);
+		thisShell.setBounds(currentLoc.x, currentLoc.y, 802, 600);
 		thisShell.setMinimumSize(662, 350);
     	
 		createPartControl(thisShell);
@@ -155,19 +155,19 @@ public class ITransactions {
 
         
         final TableColumn column1 = new TableColumn(databaseTable, SWT.LEFT);
-        column1.setWidth(70);
+        column1.setWidth(90);
         final TableColumn column6 = new TableColumn(databaseTable, SWT.LEFT);
-        column6.setWidth(70);
+        column6.setWidth(75);
         final TableColumn column7 = new TableColumn(databaseTable, SWT.LEFT);
-        column7.setWidth(70);
+        column7.setWidth(100);
         final TableColumn column8 = new TableColumn(databaseTable, SWT.LEFT);
-        column8.setWidth(70);
+        column8.setWidth(100);
         final TableColumn column2 = new TableColumn(databaseTable, SWT.LEFT);
         column2.setWidth(200);
         final TableColumn column3 = new TableColumn(databaseTable, SWT.RIGHT);
-        column3.setWidth(75);
+        column3.setWidth(95);
         final TableColumn column4 = new TableColumn(databaseTable, SWT.RIGHT);
-        column4.setWidth(75);
+        column4.setWidth(95);
 //        final TableColumn column5 = new TableColumn(databaseTable, SWT.RIGHT);
 //        column5.setWidth(75);
 
