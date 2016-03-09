@@ -12,24 +12,20 @@ public class DatabaseController {
 
 	private Connection conn;
 	private static DatabaseController dbController;
-	String user = "user";
-	String password = "password";
-	String host = "remotehost";
-	int port=929;
+
+	private String sshUser = "xxx";
+	private String sshPassword = "xxx";
+	private String sshHost = "xx.xx.com";
+	private int sshPort=100;
+	private int sqlPort=500;
+	private String sqlUser = "xx";
+	private String sqlPass = "xx";
+	private String sqlDbName = "xx";
+	private String url = "jdbc:mariadb://localhost:" + sqlPort + "/" + sqlDbName;
+	
+	private static Session session; 
 	
 	private DatabaseController() {
-		try {
-			JSch jsch = new JSch();
-			Session session = jsch.getSession(user, host, port);
-			session.setPassword(password);
-			session.setConfig("StrictHostKeyChecking", "no");
-			session.connect();
-			session.setPortForwardingL(3929, "localhost", 3929);
-	    } catch(Exception e){
-	    	System.err.print(e);
-		}
-
-		
 		dbController = this;
 		try {
 			DriverManager.registerDriver((Driver)Class.forName("org.mariadb.jdbc.Driver").newInstance());
@@ -41,15 +37,19 @@ public class DatabaseController {
 		}
 	}
 	
-	
-	public static void go(){
-	}
-	
 	private void openConnection() throws SQLException {
-		String url = "jdbc:mariadb://localhost:3929/accounting_dollars";
-		String username="root";
-		String pasword="password";
-		conn = DriverManager.getConnection(url, username, pasword);
+		try {
+			JSch jsch = new JSch();
+			session = jsch.getSession(sshUser, sshHost, sshPort);
+			session.setPassword(sshPassword);
+			session.setConfig("StrictHostKeyChecking", "no");
+			session.connect();
+			session.setPortForwardingL(sqlPort, "localhost", sqlPort);
+	    } catch(Exception e){
+	    	System.err.print(e);
+		}
+
+		conn = DriverManager.getConnection(url, sqlUser, sqlPass);
 		conn.setAutoCommit(true);
 	}
 
@@ -58,7 +58,7 @@ public class DatabaseController {
 		if (dbController == null) {
 			dbController = new DatabaseController();
 		}
-		if (dbController.conn == null || dbController.conn.isClosed()) {
+		if (dbController.conn == null || session == null || !session.isConnected() || dbController.conn.isClosed()) {
 			dbController.openConnection();			
 		}
 		return dbController.conn;
